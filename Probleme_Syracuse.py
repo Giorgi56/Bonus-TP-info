@@ -1,5 +1,6 @@
 """On étudie la suite de Syracuse"""
 
+from ast import Index
 from time import time
 
 def tempsdevol(num :int) -> int:
@@ -29,19 +30,11 @@ def altitude(num :int) -> float:
             
     return(max(l))
 
-# tempsdarret() ver1
-
-# def tempsdarret(c):
-#     for i in range(1, 1_000_001):
-#         if altitude(i) > c:
-#             
-#             return altitude(i)
-
 # tempsdarret() ver2
 
 def tempsdarret(c :int) -> int:
     Un = c
-    n = 0  # Indice n du terme de Un < c
+    n = 0   # Indice n du terme de Un < c
     while Un >= c:
         if Un % 2 == 0:
             Un /= 2
@@ -51,17 +44,6 @@ def tempsdarret(c :int) -> int:
             n += 1
     
     return n
-
-# Probablement inutile
-
-# def f(c):
-#     """tempsdarret mais avec une boucle while"""
-#     
-#     i = 1
-#     
-#     while i < 1_000_001 and altitude(i) <= c:
-#         i += 1
-#     return altitude(i)
 
 def verification(m :int):
     temps = time()
@@ -82,3 +64,32 @@ def verif(m):
     temps2 = time()
 
     return temps2 - temps
+
+# Question 6
+
+def vol_max() -> tuple:
+    """Renvoie un tuple contenant respectivement l'index puis la 
+    valeur du max des qltitudes des 10**6 premiers entiers"""
+    values = []                          # C'est là qu'on stoquera les altitudes maximales
+
+    for i in range(1, 1_000_001):
+        values.append(altitude(i))
+    
+    index_ = values.index(max(values))
+    maximum = max(values)
+    return (index_, maximum)
+
+# Question 7
+
+def tps_max(m) -> tuple:
+    """Renvoie un tuple ... des tps d'arrêt des m - 1 premiers entiers allant de 1 à m"""
+    values = []
+
+    for i in range(1, m + 1):
+        values.append(tempsdevol(i))
+    
+    index_ = values.index(max(values))  # Recyclage de code
+    maximum = max(values)               # Recyclage de code
+    return(index_, maximum)             # Recyclage de code
+
+# Question 8
